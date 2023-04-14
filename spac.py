@@ -124,7 +124,12 @@ if __name__ == "__main__":
             moved = stn(moving, pred)
             step += 1
         toc = time.time()
-        wrap_save_path=r"F:\peizhun\SPAC-Deformable-Registration-main\mydata\moved"+"/"+"moved"+str(i)+".nii"
+        save_name = reg_data.data_info[i][1].split('\\')[-1]
+        # pred = flow if pred is None else stn(pred, flow) + flow
+
+        wrap_save_path = r"F:\peizhun\SPAC-Deformable-Registration-main\mydata\moved_step" + "/" + str(save_name) + str(
+            i) + ".nii"
+        #wrap_save_path=r"F:\peizhun\SPAC-Deformable-Registration-main\mydata\moved"+"/"+"moved"+str(i)+".nii"
         warped_im = stn(moving, pred).cpu().detach().numpy()
         fixed_path = r'F:\peizhun\SPAC-Deformable-Registration-main\mydata\128\mni_icbm152_t1_tal_nlin_sym_09a_brain.nii'
         fixed_sitk = itk.ReadImage(fixed_path)
